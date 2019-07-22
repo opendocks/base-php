@@ -32,11 +32,6 @@ RUN apt-get update && \
     libmcrypt-dev \
   && rm -rf /var/lib/apt/lists/*
 
-# Error: configure: error: freetype-config not found.
-# Fix: apt-get install libfreetype6-dev
-# Ref: https://jcutrer.com/linux/how-to-compile-php7-on-ubuntu-14-04
-RUN apt-get install libfreetype6-dev
-
 # Install the PHP mcrypt extention
 RUN docker-php-ext-install mcrypt \
   # Install the PHP pdo_mysql extention
@@ -46,6 +41,6 @@ RUN docker-php-ext-install mcrypt \
   # Install the PHP gd library
   && docker-php-ext-configure gd \
     --enable-gd-native-ttf \
-    --with-jpeg-dir=/usr/lib \
-    --with-freetype-dir=/usr/include/freetype2 && \
+    --with-jpeg-dir=/usr/lib && \
+  # --with-freetype-dir=/usr/include/freetype2 && \
     docker-php-ext-install gd
