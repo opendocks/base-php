@@ -42,5 +42,6 @@ RUN docker-php-ext-install mcrypt \
   && docker-php-ext-configure gd \
     --enable-gd-native-ttf \
     --with-jpeg-dir=/usr/lib && \
+  # Error: Commented below instruction to fix error (configure: error: freetype-config not found )
   # --with-freetype-dir=/usr/include/freetype2 && \
     docker-php-ext-install gd
