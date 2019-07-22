@@ -3,6 +3,9 @@
 #### halt script on error
 set -xe
 
+echo "${DOCKER_PASSWORD}" | docker login -u "${DOCKER_USERNAME}" --password-stdin
+
 #### Push the Docker Images
-docker login -u ${DOCKER_USERNAME} -p ${DOCKER_PASSWORD};
-docker push ${DOCKER_USERNAME}/base-php:${IMAGE_TAG};
+if [[ "$TRAVIS_BRANCH" == "master" ]]; then
+  docker push ${DOCKER_USERNAME}/base-php:${IMAGE_TAG}
+fi
