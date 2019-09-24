@@ -7,5 +7,5 @@ docker login -u "${DOCKER_USERNAME}" -p "${DOCKER_PASSWORD}"
 
 #### Push the Docker Images
 if [[ "$TRAVIS_BRANCH" == "master" ]]; then
-  docker push ${DOCKER_USERNAME}/base-php:${IMAGE_TAG}
+  docker push ${DOCKER_ORGANIZATION}/base-php:${IMAGE_TAG}
 fi
