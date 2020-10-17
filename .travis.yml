@@ -10,6 +10,7 @@ env:
     - PHP_VERSION=71-fpm IMAGE_TAG=7.1-fpm
     - PHP_VERSION=72-fpm IMAGE_TAG=7.2-fpm
     - PHP_VERSION=73-fpm IMAGE_TAG=7.3-fpm
+    - PHP_VERSION=74-fpm IMAGE_TAG=7.4-fpm
 
 # Installing a newer Docker version
 before_install:
