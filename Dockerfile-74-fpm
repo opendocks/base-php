@@ -39,5 +39,8 @@ RUN apt-get update && \
   # Install the PHP pdo_pgsql extention
   && docker-php-ext-install pdo_pgsql \
   # Install the PHP gd library
-  && docker-php-ext-configure gd --with-freetype=/usr/include/ --with-jpeg=/usr/include/ \
-  docker-php-ext-install gd
+  && docker-php-ext-configure gd \
+    --with-jpeg=/usr/lib && \
+  # Error: Commented below instruction to fix error (configure: error: freetype-config not found )
+  # --with-freetype=/usr/include/freetype2 && \
+    docker-php-ext-install gd
