@@ -28,4 +28,4 @@ jobs:
           set -eux
           docker build -f ./Dockerfile-$FILE_IDENTIFIER -t $DOCKER_ORGANIZATION/base-php:$TAG_NAME .
           docker login -u "$DOCKER_USERNAME" -p "$DOCKER_PASSWORD"
-          docker push $DOCKER_ORGANIZATION/base-ws:$TAG_NAME
+          docker push $DOCKER_ORGANIZATION/base-php:$TAG_NAME
