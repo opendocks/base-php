@@ -17,7 +17,7 @@ jobs:
     strategy:
       fail-fast: false
       matrix:
-        data: [ ["56", "5.6"], ["70", "7.0"], ["71", "7.1"], ["72", "7.2"], ["73", "7.3"], ["74", "7.4"], ["80", "8.0"], ["81", "8.1"] ]
+        data: [ ["56-fpm", "5.6-fpm"], ["70-fpm", "7.0-fpm"], ["71-fpm", "7.1-fpm"], ["72-fpm", "7.2-fpm"], ["73-fpm", "7.3-fpm"], ["74-fpm", "7.4-fpm"], ["80-fpm", "8.0-fpm"], ["81-fpm", "8.1-fpm"] ]
     steps:
       - uses: actions/checkout@v2
       - name: Build the Docker image
@@ -26,6 +26,6 @@ jobs:
           TAG_NAME: ${{ matrix.data[1] }}
         run: |
           set -eux
-          docker build -f ./Dockerfile-$FILE_IDENTIFIER-fpm -t $DOCKER_ORGANIZATION/base-ws:$TAG_NAME-fpm .
+          docker build -f ./Dockerfile-$FILE_IDENTIFIER -t $DOCKER_ORGANIZATION/base-php:$TAG_NAME .
           docker login -u "$DOCKER_USERNAME" -p "$DOCKER_PASSWORD"
-          docker push $DOCKER_ORGANIZATION/base-ws:$TAG_NAME-fpm
+          docker push $DOCKER_ORGANIZATION/base-ws:$TAG_NAME
