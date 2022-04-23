@@ -1,0 +1,31 @@
+name: CI
+
+on:
+  push:
+    branches: main
+  pull_request:
+    branches: main
+
+env:
+  DOCKER_ORGANIZATION: ${{ secrets.DOCKER_ORGANIZATION }}
+  DOCKER_USERNAME: ${{ secrets.DOCKER_USERNAME }}
+  DOCKER_PASSWORD: ${{ secrets.DOCKER_PASSWORD }}
+
+jobs:
+  build-php:
+    runs-on: ubuntu-latest
+    strategy:
+      fail-fast: false
+      matrix:
+        data: [ ["56", "5.6"], ["70", "7.0"], ["71", "7.1"], ["72", "7.2"], ["73", "7.3"], ["74", "7.4"], ["80", "8.0"], ["81", "8.1"] ]
+    steps:
+      - uses: actions/checkout@v2
+      - name: Build the Docker image
+        env:
+          FILE_IDENTIFIER: ${{ matrix.data[0] }}
+          TAG_NAME: ${{ matrix.data[1] }}
+        run: |
+          set -eux
+          docker build -f ./Dockerfile-$FILE_IDENTIFIER-fpm -t $DOCKER_ORGANIZATION/base-ws:$TAG_NAME-fpm .
+          docker login -u "$DOCKER_USERNAME" -p "$DOCKER_PASSWORD"
+          docker push $DOCKER_ORGANIZATION/base-ws:$TAG_NAME-fpm
