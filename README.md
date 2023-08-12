@@ -1,6 +1,6 @@
 # PHP Base Image
 
-[![Build Status](https://travis-ci.com/opendocks/base-php.svg?branch=master)](https://travis-ci.com/opendocks/base-php)
+[![Build Status](https://github.com/opendocks/base-php/actions/workflows/docker-build.yaml/badge.svg)](https://github.com/opendocks/base-php/actions)
 
 [Docker Hub Repository](https://cloud.docker.com/repository/docker/opendocks/base-php)
 
