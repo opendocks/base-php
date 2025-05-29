@@ -4,9 +4,9 @@
 #--------------------------------------------------------------------------
 #
 
-FROM php:7.1-fpm
+FROM php:8.3-fpm
 
-LABEL maintainer="Syed Ali Murtaza <>"
+LABEL maintainer="Syed Ali Murtaza <ali@kazmi.me>"
 
 #
 #--------------------------------------------------------------------------
@@ -17,7 +17,7 @@ LABEL maintainer="Syed Ali Murtaza <>"
 #
 
 # Install "curl", "libmemcached-dev", "libpq-dev", "libjpeg-dev",
-#         "libpng12-dev", "libfreetype6-dev", "libssl-dev", "libmcrypt-dev",
+#         "libpng-dev", "libfreetype6-dev", "libssl-dev", "libmcrypt-dev",
 RUN apt-get update && \
   apt-get upgrade -y && \
   apt-get install -y --no-install-recommends \
@@ -32,16 +32,15 @@ RUN apt-get update && \
     libmcrypt-dev \
   && rm -rf /var/lib/apt/lists/*
 
-# Install the PHP mcrypt extention
-RUN docker-php-ext-install mcrypt \
+
+
   # Install the PHP pdo_mysql extention
-  && docker-php-ext-install pdo_mysql \
+  RUN docker-php-ext-install pdo_mysql \
   # Install the PHP pdo_pgsql extention
   && docker-php-ext-install pdo_pgsql \
   # Install the PHP gd library
   && docker-php-ext-configure gd \
-    --enable-gd-native-ttf \
-    --with-jpeg-dir=/usr/lib && \
+    --with-jpeg=/usr/lib && \
   # Error: Commented below instruction to fix error (configure: error: freetype-config not found )
-  # --with-freetype-dir=/usr/include/freetype2 && \
+  # --with-freetype=/usr/include/freetype2 && \
     docker-php-ext-install gd
